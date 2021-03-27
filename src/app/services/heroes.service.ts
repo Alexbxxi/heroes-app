@@ -29,7 +29,13 @@ export class HeroesService {
   };
 
   actualizarHeroe(heroe: HeroeModel) {
-    return this.http.put(`${this.url}/heroes/${heroe.id}.json`, heroe);
+    const heroeTemp = {
+      ...heroe
+    };
+
+    delete heroeTemp.id;
+
+    return this.http.put(`${this.url}/heroes/${heroe.id}.json`, heroeTemp);
   };
 
   obtenerHeroes() {
