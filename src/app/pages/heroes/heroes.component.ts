@@ -35,12 +35,19 @@ export class HeroesComponent implements OnInit {
   }
 
   eliminarHeroe(heroe: HeroeModel, index: number) {
-    this.heroesService.eliminarHeroe(heroe)
-      .subscribe(resp => {
-        Swal.fire(
-          'Registro eliminado exitosamente!'
-        );
-        this.heroes.splice(index, 1);
+      Swal.fire({
+        title: '¿Seguro que deseas eliminar el héroe?',
+        showDenyButton: true,
+        confirmButtonText: `Aceptar`,
+        denyButtonText: `Cancelar`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.heroesService.eliminarHeroe(heroe)
+          .subscribe(resp => {
+            this.heroes.splice(index, 1);
+          })
+          Swal.fire('Registro eliminado exitosamente');
+        }
       })
   }
 
