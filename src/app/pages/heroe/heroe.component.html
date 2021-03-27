@@ -1,0 +1,66 @@
+<h1 style="color: darkblue;">Detalles del héroe</h1>
+<hr>
+
+<div class="row text-end">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/heroes">
+            <i class="fa fa-arrow-left"></i>
+            Regresar
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
+
+            <div class="form-group">
+                <label>Firebise ID</label>
+                <input type="text" class="form-control" disabled="disabled" placeholder="Firebise ID" [(ngModel)]="heroesService.heroe.id" name="id">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" placeholder="Nombre del héroe" [(ngModel)]="heroesService.heroe.nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label>Poder</label>
+                <input type="text" class="form-control" placeholder="Poder del héroe" [(ngModel)]="heroesService.heroe.poder" name="poder" required>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha de nacimiento</label>
+                <input type="date" class="form-control" placeholder="Fecha de nacimiento" [(ngModel)]="heroesService.heroe.fecha_nac" name="fecha_nac" required>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen del personaje</label>
+                <input type="file" class="form-control" placeholder="Selecciona un archivo" [(ngModel)]="heroesService.heroe.img" name="img" accept=".png, .jpg" (change)="onUpload($event)">
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <br>
+                <button class="btn btn-outline-success w-50" type="button" *ngIf="heroesService.heroe.vivo" (click)="heroesService.heroe.vivo = false">
+                    <i class="fa fa-smile-wink"></i>
+                    Vivo
+                </button>
+                <button class="btn btn-outline-danger w-50" type="button"  *ngIf="!heroesService.heroe.vivo" (click)="heroesService.heroe.vivo = true">
+                    <i class="fa fa-dizzy"></i>
+                    Muerto
+                </button>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

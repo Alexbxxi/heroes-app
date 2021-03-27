@@ -1,0 +1,52 @@
+<h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: darkblue;">Héroes de Marvel</h1>
+<hr>
+
+<div class="row animate__animated animate__fadeIn slower">
+    <div class="col text-end">
+        <button routerLink="/heroe/nuevo" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Nuevo
+        </button>
+    </div>
+</div>
+<br>
+
+<div class="row row-cols-1 row-cols-md-4" *ngIf="heroes.length > 0 && !cargando">
+    <div class="col my-3" *ngFor="let heroe of heroes; let i=index;">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"
+                    style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #D60D0D">{{ heroe.nombre
+                    }}</h5>
+                <p class="card-text">Poder: {{ heroe.poder }}</p>
+                <p class="card-text">Estado: {{ (heroe.vivo) ? 'Vivo' : 'Muerto' }}</p>
+            </div>
+            <img src="{{ heroe.img }}"
+                class="card-img-top w-50 m-auto d-block py-4 animate__animated animate__bounceIn">
+            <div class="card-footer bg-dark">
+                <small class="text-white">Fecha de nacimiento: {{ heroe.fecha_nac }}</small><br>
+                <button (click)="editarHeroe(heroe)" class="btn btn-light"
+                    style="margin-right: 0.5rem; margin-top: 1rem;"><i class="fa fa-edit"></i></button>
+                <button (click)="eliminarHeroe(heroe, i)" class="btn btn-danger" style="margin-top: 1rem;"><i
+                        class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning text-center mt-3" *ngIf="heroes.length == 0 && !cargando">
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+</div>
+
+<div class="alert alert-info text-center mt-3" *ngIf="cargando">
+    <h4 class="alert-heading">Cargando</h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
